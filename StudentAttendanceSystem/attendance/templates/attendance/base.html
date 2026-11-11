@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Student Attendance System{% endblock %}</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'attendance/style.css' %}">
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="{% url 'attendance:home' %}" class="brand">
+                Student Attendance System
+            </a>
+
+            <div class="nav-links">
+                <a href="{% url 'attendance:home' %}">Home</a>
+                <a href="{% url 'attendance:student_list' %}">Students</a>
+                <a href="{% url 'attendance:attendance_list' %}">Attendance</a>
+                <a href="{% url 'attendance:student_create' %}">Register Student</a>
+                <a href="{% url 'attendance:attendance_create' %}">Record Attendance</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+    <footer>
+        <p>Student Attendance Management System | CSC2105 Django Practical</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+
+{% extends 'attendance/base.html' %}
+
+{% block title %}Attendance Records | Attendance System{% endblock %}
+
+{% block content %}
+
+<div class="page-heading">
+    <h1>Attendance Records</h1>
+
+    <a href="{% url 'attendance:attendance_create' %}" class="btn">
+        + Record Attendance
+    </a>
+</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for record in records %}
+                <tr>
+                    <td>{{ record.student.student_id }}</td>
+                    <td>{{ record.student.full_name }}</td>
+                    <td>{{ record.date|date:"d M Y" }}</td>
+                    <td>
+                        <span class="status">
+                            {{ record.get_status_display }}
+                        </span>
+                    </td>
+                </tr>
+
+            {% empty %}
+                <tr>
+                    <td colspan="4">No attendance records available.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
